@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+dist
+dist-ssr
+
+# env (Google Apps Script のURLなど秘匿情報を含む)
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+npm-debug.log*
+
+# editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db

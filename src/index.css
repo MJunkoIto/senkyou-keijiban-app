@@ -1,0 +1,37 @@
+:root {
+  --color-bg: #f4f6f4;
+  --color-surface: #ffffff;
+  --color-primary: #1b5e20;
+  --color-primary-dark: #144618;
+  --color-border: #d7ddd7;
+  --color-text: #1c1f1c;
+  --color-muted: #6b746b;
+  --color-checked-bg: #eceeec;
+  --tap-min: 44px;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+}
+
+button {
+  font-family: inherit;
+}

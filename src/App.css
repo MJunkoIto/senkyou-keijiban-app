@@ -1,0 +1,314 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== ヘッダー (上部固定) ===== */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-primary);
+  color: #fff;
+  padding-top: env(safe-area-inset-top);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.app-header__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 14px 16px 16px;
+  text-align: center;
+}
+
+.app-title {
+  margin: 0;
+  font-size: calc(1.15rem + 5px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.app-progress {
+  /* タイトルとの間に余白を取り、進捗を目立たせる */
+  margin: 12px 0 0;
+  font-size: calc(1.1rem + 5px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+/* ===== 同期エリア (再読み込みボタン・最終更新) ===== */
+.app-sync {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.reload-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reload-button:active {
+  background-color: rgba(255, 255, 255, 0.28);
+}
+
+.reload-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.app-updated {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.app-hint {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===== メイン (スクロール領域) ===== */
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 12px 12px calc(32px + env(safe-area-inset-bottom));
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== ステータス表示 ===== */
+.status {
+  text-align: center;
+  color: var(--color-muted);
+  padding: 32px 16px;
+}
+
+.status--error {
+  color: #b3261e;
+}
+
+.retry-button {
+  margin-top: 12px;
+  min-height: var(--tap-min);
+  padding: 0 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* ===== 投票区ブロック ===== */
+.district {
+  margin-bottom: 20px;
+}
+
+.district__heading {
+  margin: 0 0 8px;
+  padding: 10px 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background-color: #e3ece3;
+  border-left: 6px solid var(--color-primary);
+  border-radius: 6px;
+}
+
+/* ===== 行リスト ===== */
+.row-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 12px;
+  min-height: 64px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+/* チェック済みの行 */
+.row--checked {
+  background-color: var(--color-checked-bg);
+}
+
+.row--checked .row__facility,
+.row--checked .row__address {
+  text-decoration: line-through;
+  color: var(--color-muted);
+}
+
+/* ===== チェックボックス (押しやすく大きめ) ===== */
+.row__check {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.row__check input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.row__checkbox {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-primary);
+  border-radius: 6px;
+  background-color: #fff;
+  transition: background-color 0.15s ease;
+}
+
+.row__check input:checked + .row__checkbox {
+  background-color: var(--color-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
+}
+
+.row__check input:disabled + .row__checkbox {
+  opacity: 0.5;
+}
+
+/* ===== 行の本文 ===== */
+.row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.row__line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.row__facility {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.row__badge {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--color-primary);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.row__address {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  /* 住所が長い場合は折り返す */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.row__checkedat {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+/* ===== 地図リンク ===== */
+.row__map {
+  flex-shrink: 0;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  min-height: var(--tap-min);
+  padding: 0 12px;
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  color: var(--color-primary);
+  background-color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.row__map:active {
+  background-color: #e3ece3;
+}
+
+/* ===== 保存ステータスのトースト ===== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 50;
+  max-width: calc(100% - 32px);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.toast--saving {
+  background-color: #555e55;
+}
+
+.toast--success {
+  background-color: var(--color-primary);
+}
+
+.toast--error {
+  background-color: #b3261e;
+}
+
+/* ===== 画面が狭いとき ===== */
+@media (max-width: 480px) {
+  .app-title {
+    font-size: calc(1.05rem + 5px);
+  }
+  .row {
+    padding: 12px 10px;
+    gap: 8px;
+  }
+}
