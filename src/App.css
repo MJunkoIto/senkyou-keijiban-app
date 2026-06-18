@@ -304,8 +304,20 @@
 
 /* ===== 画面が狭いとき ===== */
 @media (max-width: 480px) {
+  /* スマホではヘッダーを小さくし、リスト領域を広げる */
+  .app-header__inner {
+    padding: 8px 12px 10px;
+  }
   .app-title {
-    font-size: calc(1.05rem + 5px);
+    /* ボタン「進捗を更新」と同程度のサイズに揃える */
+    font-size: 1rem;
+  }
+  .app-progress {
+    font-size: 1rem;
+    margin-top: 6px;
+  }
+  .app-sync {
+    margin-top: 8px;
   }
   .row {
     padding: 12px 10px;
