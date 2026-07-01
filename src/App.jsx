@@ -4,10 +4,10 @@ import './App.css'
 
 /**
  * Googleマップ検索URLを組み立てる。
- * 検索語 = 住所のみ（施設名は含めない）。
+ * 検索語 = 施設名 + " " + 住所 (施設名が空なら住所のみ)。
  */
-function buildMapsUrl(address) {
-  const query = address || ''
+function buildMapsUrl(facility, address) {
+  const query = [facility, address].filter((s) => s && s.trim()).join(' ')
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
 }
 
@@ -249,7 +249,7 @@ export default function App() {
 
                       <a
                         className="row__map"
-                        href={buildMapsUrl(item.address)}
+                        href={buildMapsUrl(item.facility, item.address)}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
